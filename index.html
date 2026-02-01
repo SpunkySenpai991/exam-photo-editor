@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Photo & Signature Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <!-- Animated Background -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-icon">📸</div>
+                    <h1>Exam Photo Editor</h1>
+                </div>
+                <p class="subtitle">Resize your photos and signatures for any competitive exam instantly!</p>
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-text">
+                            <strong>10+</strong>
+                            <span>Exams Supported</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-text">
+                            <strong>Instant</strong>
+                            <span>Processing</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🔒</div>
+                        <div class="stat-text">
+                            <strong>100%</strong>
+                            <span>Private</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Exam Selection -->
+            <section class="card">
+                <div class="card-header">
+                    <div class="step-badge">1</div>
+                    <h2>Select Your Exam</h2>
+                </div>
+                <div class="form-group">
+                    <label for="examSelect">
+                        <span class="label-icon">🎓</span>
+                        Choose Exam:
+                    </label>
+                    <select id="examSelect" class="input-field">
+                        <option value="">-- Select an Exam --</option>
+                        <option value="jee">🔬 JEE Main</option>
+                        <option value="neet">🏥 NEET UG</option>
+                        <option value="cuet">📚 CUET (UG)</option>
+                        <option value="gate">⚙️ GATE</option>
+                        <option value="cat">💼 CAT</option>
+                        <option value="upsc">🏛️ UPSC Civil Services</option>
+                        <option value="ssc">📝 SSC CGL</option>
+                        <option value="ibps">🏦 IBPS PO</option>
+                        <option value="nda">🎖️ NDA & NA</option>
+                        <option value="clat">⚖️ CLAT</option>
+                    </select>
+                </div>
+
+                <div id="examInfo" class="exam-info" style="display: none;">
+                    <div class="info-header">
+                        <span class="info-icon">ℹ️</span>
+                        <h3>Requirements</h3>
+                    </div>
+                    <div class="requirements">
+                        <div class="req-card">
+                            <div class="req-icon">📷</div>
+                            <strong>Photo</strong>
+                            <p id="photoReq"></p>
+                        </div>
+                        <div class="req-card">
+                            <div class="req-icon">✍️</div>
+                            <strong>Signature</strong>
+                            <p id="signReq"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- File Upload -->
+            <section class="card" id="uploadSection" style="display: none;">
+                <div class="card-header">
+                    <div class="step-badge">2</div>
+                    <h2>Upload Your Files</h2>
+                </div>
+
+                <div class="upload-group">
+                    <div class="upload-box">
+                        <label for="photoUpload" class="upload-label">
+                            <div class="upload-icon">📷</div>
+                            <span>Upload Photo</span>
+                            <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                        </label>
+                        <div id="photoPreview" class="preview" style="display: none;">
+                            <img id="photoImg" alt="Photo Preview">
+                            <p id="photoSize"></p>
+                        </div>
+                    </div>
+
+                    <div class="upload-box">
+                        <label for="signUpload" class="upload-label">
+                            <div class="upload-icon">✍️</div>
+                            <span>Upload Signature</span>
+                            <input type="file" id="signUpload" accept="image/*" style="display: none;">
+                        </label>
+                        <div id="signPreview" class="preview" style="display: none;">
+                            <img id="signImg" alt="Signature Preview">
+                            <p id="signSize"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process Button -->
+            <section class="card" id="processSection" style="display: none;">
+                <div class="card-header">
+                    <div class="step-badge">3</div>
+                    <h2>Process & Download</h2>
+                </div>
+                <button id="processBtn" class="btn-primary">
+                    <span class="btn-icon">⚡</span>
+                    Process Images
+                </button>
+
+                <div id="processingMsg" class="processing" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Processing your images...</p>
+                </div>
+            </section>
+
+            <!-- Download Section -->
+            <section class="card" id="downloadSection" style="display: none;">
+                <h2>✅ Ready to Download!</h2>
+                <div class="download-grid">
+                    <div class="download-item">
+                        <h3>Processed Photo</h3>
+                        <div class="preview-result">
+                            <img id="processedPhoto" alt="Processed Photo">
+                        </div>
+                        <button id="downloadPhoto" class="btn-download">Download Photo</button>
+                    </div>
+
+                    <div class="download-item">
+                        <h3>Processed Signature</h3>
+                        <div class="preview-result">
+                            <img id="processedSign" alt="Processed Signature">
+                        </div>
+                        <button id="downloadSign" class="btn-download">Download Signature</button>
+                    </div>
+                </div>
+
+                <button id="resetBtn" class="btn-secondary">Process Another Exam</button>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Why Choose Us?</h4>
+                    <ul>
+                        <li>✅ 100% Free Forever</li>
+                        <li>✅ No Registration Required</li>
+                        <li>✅ Privacy Protected</li>
+                        <li>✅ Mobile Friendly</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Supported Formats</h4>
+                    <div class="format-badges">
+                        <span class="badge">JPG</span>
+                        <span class="badge">JPEG</span>
+                        <span class="badge">PNG</span>
+                        <span class="badge">WebP</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Made with ❤️ for students</p>
+                <p class="note">🔒 All processing happens locally in your browser. Your photos never leave your device.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
