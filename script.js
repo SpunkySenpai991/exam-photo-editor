@@ -693,3 +693,207 @@ function resetForm() {
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// ============================================
+// SCROLL REVEAL ANIMATIONS
+// ============================================
+
+function initScrollReveal() {
+    const cards = document.querySelectorAll('.card');
+
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px)';
+        card.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+        observer.observe(card);
+    });
+}
+
+// ============================================
+// 3D TILT EFFECT ON CARDS
+// ============================================
+
+function init3DTilt() {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
+    });
+}
+
+// ============================================
+// MAGNETIC BUTTON EFFECT
+// ============================================
+
+function initMagneticButtons() {
+    const buttons = document.querySelectorAll('.btn-primary, .btn-download');
+
+    buttons.forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            button.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.02)`;
+        });
+
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = 'translate(0, 0) scale(1)';
+        });
+    });
+}
+
+// ============================================
+// PARTICLE CURSOR EFFECT
+// ============================================
+
+function initCursorEffect() {
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor-glow';
+    cursor.style.cssText = `
+        position: fixed;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(0, 245, 212, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease;
+        opacity: 0;
+    `;
+    document.body.appendChild(cursor);
+
+    let cursorVisible = false;
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+
+        if (!cursorVisible) {
+            cursor.style.opacity = '1';
+            cursorVisible = true;
+        }
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        cursorVisible = false;
+    });
+}
+
+// ============================================
+// TYPING EFFECT FOR SUBTITLE
+// ============================================
+
+function initTypingEffect() {
+    const subtitle = document.querySelector('.subtitle');
+    if (!subtitle) return;
+
+    const text = subtitle.textContent;
+    subtitle.textContent = '';
+    subtitle.style.opacity = '1';
+
+    let index = 0;
+    const typeSpeed = 30;
+
+    function type() {
+        if (index < text.length) {
+            subtitle.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, typeSpeed);
+        }
+    }
+
+    // Start typing after a small delay
+    setTimeout(type, 500);
+}
+
+// ============================================
+// SMOOTH NUMBER COUNTER
+// ============================================
+
+function initCounters() {
+    const statNumbers = document.querySelectorAll('.stat-text strong');
+
+    statNumbers.forEach(stat => {
+        const text = stat.textContent;
+        const match = text.match(/\d+/);
+
+        if (match) {
+            const target = parseInt(match[0]);
+            const suffix = text.replace(match[0], '');
+            let current = 0;
+            const increment = target / 30;
+            const duration = 1000;
+            const stepTime = duration / 30;
+
+            stat.textContent = '0' + suffix;
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    const counter = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = target + suffix;
+                            clearInterval(counter);
+                        } else {
+                            stat.textContent = Math.floor(current) + suffix;
+                        }
+                    }, stepTime);
+                    observer.unobserve(stat);
+                }
+            }, { threshold: 0.5 });
+
+            observer.observe(stat);
+        }
+    });
+}
+
+// ============================================
+// INITIALIZE ALL EFFECTS
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Delay initialization for smoother page load
+    setTimeout(() => {
+        initScrollReveal();
+        init3DTilt();
+        initMagneticButtons();
+        initCursorEffect();
+        initCounters();
+    }, 100);
+});
