@@ -630,12 +630,58 @@ label {
 }
 
 /* Custom Select Arrow */
-.input-field {
+select.input-field {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300f5d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 16px center;
     background-size: 20px;
     padding-right: 50px;
+    background-color: var(--bg-dark);
+}
+
+/* Dropdown Options Styling */
+select.input-field option,
+select.input-field optgroup {
+    background: #0a0a0f;
+    color: #ffffff;
+    padding: 12px 16px;
+    border: none;
+}
+
+select.input-field option:hover,
+select.input-field option:focus,
+select.input-field option:checked {
+    background: linear-gradient(135deg, #00f5d4, #7b2cbf);
+    color: #0a0a0f;
+}
+
+select.input-field optgroup {
+    color: #00f5d4;
+    font-weight: 700;
+    font-style: normal;
+    padding: 8px 12px;
+    background: #14141f;
+}
+
+/* Light theme dropdown */
+[data-theme="light"] select.input-field {
+    background-color: var(--bg-glass);
+}
+
+[data-theme="light"] select.input-field option,
+[data-theme="light"] select.input-field optgroup {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+[data-theme="light"] select.input-field option:checked {
+    background: linear-gradient(135deg, #00f5d4, #7b2cbf);
+    color: #0a0a0f;
+}
+
+[data-theme="light"] select.input-field optgroup {
+    background: #e2e8f0;
+    color: #7b2cbf;
 }
 
 /* ============================================
