@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Photo & Signature Editor</title>
+    <title>Exam Photo & Signature Editor | Free Online Tool for Indian Exams</title>
+    <meta name="description" content="Free online tool to resize photos and signatures for JEE, NEET, UPSC, SSC, IBPS and 20+ Indian competitive exams. No registration required. 100% private.">
+    <meta name="keywords" content="exam photo editor, signature resize, JEE photo size, NEET photo, UPSC photo, passport photo resize">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,7 +35,7 @@
                     <div class="stat-item">
                         <div class="stat-icon">🎯</div>
                         <div class="stat-text">
-                            <strong>10+</strong>
+                            <strong>20+</strong>
                             <span>Exams Supported</span>
                         </div>
                     </div>
@@ -69,16 +71,43 @@
                     </label>
                     <select id="examSelect" class="input-field">
                         <option value="">-- Select an Exam --</option>
-                        <option value="jee">🔬 JEE Main</option>
-                        <option value="neet">🏥 NEET UG</option>
-                        <option value="cuet">📚 CUET (UG)</option>
-                        <option value="gate">⚙️ GATE</option>
-                        <option value="cat">💼 CAT</option>
-                        <option value="upsc">🏛️ UPSC Civil Services</option>
-                        <option value="ssc">📝 SSC CGL</option>
-                        <option value="ibps">🏦 IBPS PO</option>
-                        <option value="nda">🎖️ NDA & NA</option>
-                        <option value="clat">⚖️ CLAT</option>
+                        <optgroup label="🔬 Engineering & Science">
+                            <option value="jee">JEE Main</option>
+                            <option value="jee_advanced">JEE Advanced</option>
+                            <option value="gate">GATE</option>
+                            <option value="neet">NEET UG</option>
+                        </optgroup>
+                        <optgroup label="📚 University & Higher Education">
+                            <option value="cuet">CUET (UG)</option>
+                            <option value="ugc_net">UGC NET</option>
+                            <option value="cat">CAT</option>
+                            <option value="clat">CLAT</option>
+                            <option value="ctet">CTET</option>
+                        </optgroup>
+                        <optgroup label="🏛️ Government & Civil Services">
+                            <option value="upsc">UPSC Civil Services</option>
+                            <option value="uppsc">UPPSC</option>
+                            <option value="bpsc">BPSC</option>
+                            <option value="mppsc">MPPSC</option>
+                            <option value="rpsc">RPSC</option>
+                        </optgroup>
+                        <optgroup label="🏦 Banking & Insurance">
+                            <option value="ibps">IBPS PO/Clerk</option>
+                            <option value="sbi">SBI PO/Clerk</option>
+                            <option value="rbi">RBI Grade B</option>
+                            <option value="lic">LIC AAO</option>
+                        </optgroup>
+                        <optgroup label="📝 SSC & Railway">
+                            <option value="ssc">SSC CGL/CHSL</option>
+                            <option value="rrb_ntpc">RRB NTPC</option>
+                            <option value="rrb_je">RRB JE</option>
+                            <option value="rrb_group_d">RRB Group D</option>
+                        </optgroup>
+                        <optgroup label="🎖️ Defence">
+                            <option value="nda">NDA & NA</option>
+                            <option value="cds">CDS</option>
+                            <option value="afcat">AFCAT</option>
+                        </optgroup>
                     </select>
                 </div>
 
@@ -102,44 +131,80 @@
                 </div>
             </section>
 
+            <!-- Processing Mode Selection -->
+            <section class="card" id="modeSection" style="display: none;">
+                <div class="card-header">
+                    <div class="step-badge">2</div>
+                    <h2>What do you want to process?</h2>
+                </div>
+                <div class="mode-buttons">
+                    <button type="button" class="mode-btn" data-mode="both">
+                        <span class="mode-icon">📷 + ✍️</span>
+                        <span class="mode-text">Both Photo & Signature</span>
+                    </button>
+                    <button type="button" class="mode-btn" data-mode="photo">
+                        <span class="mode-icon">📷</span>
+                        <span class="mode-text">Photo Only</span>
+                    </button>
+                    <button type="button" class="mode-btn" data-mode="signature">
+                        <span class="mode-icon">✍️</span>
+                        <span class="mode-text">Signature Only</span>
+                    </button>
+                </div>
+            </section>
+
             <!-- File Upload -->
             <section class="card" id="uploadSection" style="display: none;">
                 <div class="card-header">
-                    <div class="step-badge">2</div>
+                    <div class="step-badge">3</div>
                     <h2>Upload Your Files</h2>
                 </div>
 
                 <div class="upload-group">
-                    <div class="upload-box">
-                        <label for="photoUpload" class="upload-label">
+                    <div class="upload-box" id="photoUploadBox">
+                        <div class="upload-label" id="photoDropZone">
                             <div class="upload-icon">📷</div>
                             <span>Upload Photo</span>
-                            <input type="file" id="photoUpload" accept="image/*" style="display: none;">
-                        </label>
+                            <p class="drag-text">or drag & drop here</p>
+                            <input type="file" id="photoUpload" accept="image/*">
+                        </div>
                         <div id="photoPreview" class="preview" style="display: none;">
                             <img id="photoImg" alt="Photo Preview">
                             <p id="photoSize"></p>
+                            <button type="button" class="btn-remove" id="removePhoto">✕ Remove</button>
                         </div>
                     </div>
 
-                    <div class="upload-box">
-                        <label for="signUpload" class="upload-label">
+                    <div class="upload-box" id="signUploadBox">
+                        <div class="upload-label" id="signDropZone">
                             <div class="upload-icon">✍️</div>
                             <span>Upload Signature</span>
-                            <input type="file" id="signUpload" accept="image/*" style="display: none;">
-                        </label>
+                            <p class="drag-text">or drag & drop here</p>
+                            <input type="file" id="signUpload" accept="image/*">
+                        </div>
                         <div id="signPreview" class="preview" style="display: none;">
                             <img id="signImg" alt="Signature Preview">
                             <p id="signSize"></p>
+                            <button type="button" class="btn-remove" id="removeSign">✕ Remove</button>
                         </div>
                     </div>
+                </div>
+
+                <!-- Quality Slider -->
+                <div class="quality-section">
+                    <label for="qualitySlider">
+                        <span class="label-icon">🎚️</span>
+                        Image Quality: <span id="qualityValue">92%</span>
+                    </label>
+                    <input type="range" id="qualitySlider" min="50" max="100" value="92" class="quality-slider">
+                    <p class="quality-hint">Lower quality = smaller file size. Increase if output is blurry.</p>
                 </div>
             </section>
 
             <!-- Process Button -->
             <section class="card" id="processSection" style="display: none;">
                 <div class="card-header">
-                    <div class="step-badge">3</div>
+                    <div class="step-badge">4</div>
                     <h2>Process & Download</h2>
                 </div>
                 <button id="processBtn" class="btn-primary">
@@ -156,25 +221,87 @@
             <!-- Download Section -->
             <section class="card" id="downloadSection" style="display: none;">
                 <h2>✅ Ready to Download!</h2>
-                <div class="download-grid">
-                    <div class="download-item">
+
+                <!-- File Size Warnings -->
+                <div id="sizeWarnings" class="size-warnings" style="display: none;"></div>
+
+                <div class="download-grid" id="downloadGrid">
+                    <div class="download-item" id="photoDownloadItem">
                         <h3>Processed Photo</h3>
                         <div class="preview-result">
                             <img id="processedPhoto" alt="Processed Photo">
                         </div>
+                        <p class="file-info" id="processedPhotoInfo"></p>
                         <button id="downloadPhoto" class="btn-download">Download Photo</button>
                     </div>
 
-                    <div class="download-item">
+                    <div class="download-item" id="signDownloadItem">
                         <h3>Processed Signature</h3>
                         <div class="preview-result">
                             <img id="processedSign" alt="Processed Signature">
                         </div>
+                        <p class="file-info" id="processedSignInfo"></p>
                         <button id="downloadSign" class="btn-download">Download Signature</button>
                     </div>
                 </div>
 
-                <button id="resetBtn" class="btn-secondary">Process Another Exam</button>
+                <div class="download-actions">
+                    <button id="downloadAllBtn" class="btn-primary btn-zip">
+                        <span>📦</span>
+                        Download All as ZIP
+                    </button>
+                    <button id="resetBtn" class="btn-secondary">Process Another Exam</button>
+                </div>
+            </section>
+
+            <!-- FAQs Section -->
+            <section class="card faq-section">
+                <div class="card-header">
+                    <div class="step-badge">?</div>
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>Is this tool really free?</summary>
+                        <p>Yes! This tool is 100% free to use with no hidden charges, no registration required, and no watermarks on your images.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Are my photos safe and private?</summary>
+                        <p>Absolutely. All image processing happens directly in your browser. Your photos never leave your device and are never uploaded to any server. We don't store or see your images.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>What if my file size is too large after processing?</summary>
+                        <p>Use the quality slider to reduce the image quality. Lower quality means smaller file size. Start at 80% and go lower if needed. Most exams accept 70-80% quality without visible difference.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>What image formats are supported?</summary>
+                        <p>You can upload JPG, JPEG, PNG, and WebP images. The output format is automatically set based on the exam requirements (usually JPG).</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Can I process just a photo without a signature?</summary>
+                        <p>Yes! After selecting your exam, choose "Photo Only" or "Signature Only" to process just one image.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Why is my photo getting cropped?</summary>
+                        <p>Each exam has specific dimension requirements. The tool scales and centers your image to fit these dimensions. For best results, use a photo with your face centered and some space around it.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Does this work on mobile phones?</summary>
+                        <p>Yes! This tool works on all devices - smartphones, tablets, and computers. You can even take a photo directly from your phone camera.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>My exam is not listed. What should I do?</summary>
+                        <p>Contact us on social media (links below) with the exam name and photo/signature requirements. We'll add it to the tool.</p>
+                    </details>
+                </div>
             </section>
         </main>
 
@@ -187,6 +314,7 @@
                         <li>✅ No Registration Required</li>
                         <li>✅ Privacy Protected</li>
                         <li>✅ Mobile Friendly</li>
+                        <li>✅ 20+ Exams Supported</li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -197,15 +325,32 @@
                         <span class="badge">PNG</span>
                         <span class="badge">WebP</span>
                     </div>
+                    <h4 style="margin-top: 20px;">Connect With Me</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/SpunkySenpai991" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/aditya-jha-0b979534a/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://x.com/Jynxk3" target="_blank" rel="noopener noreferrer" class="social-link" title="X (Twitter)">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/y_adiityaa/" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Made with ❤️ for students</p>
+                <p>Made with ❤️ for students by <a href="https://github.com/SpunkySenpai991" target="_blank">Aditya Jha</a></p>
                 <p class="note">🔒 All processing happens locally in your browser. Your photos never leave your device.</p>
             </div>
         </footer>
     </div>
 
+    <!-- JSZip Library for ZIP downloads -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
