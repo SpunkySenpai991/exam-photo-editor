@@ -661,6 +661,12 @@ function resetForm() {
     qualitySlider.value = 92;
     qualityValue.textContent = '92%';
 
+    // Reset custom dropdown
+    const dropdownText = document.querySelector('.dropdown-text');
+    const dropdownOptions = document.querySelectorAll('.dropdown-option');
+    if (dropdownText) dropdownText.textContent = '-- Select an Exam --';
+    dropdownOptions.forEach(opt => opt.classList.remove('selected'));
+
     // Reset mode buttons
     document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
 
@@ -727,11 +733,12 @@ function initScrollReveal() {
 }
 
 // ============================================
-// 3D TILT EFFECT ON CARDS
+// 3D TILT EFFECT ON CARDS (excluding FAQ)
 // ============================================
 
 function init3DTilt() {
-    const cards = document.querySelectorAll('.card');
+    // Exclude cards containing FAQ section
+    const cards = document.querySelectorAll('.card:not(:has(.faq-section))');
 
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -885,11 +892,75 @@ function initCounters() {
 }
 
 // ============================================
+// CUSTOM DROPDOWN
+// ============================================
+
+function initCustomDropdown() {
+    const dropdown = document.getElementById('customDropdown');
+    const selected = dropdown.querySelector('.dropdown-selected');
+    const optionsContainer = dropdown.querySelector('.dropdown-options');
+    const options = dropdown.querySelectorAll('.dropdown-option');
+    const dropdownText = dropdown.querySelector('.dropdown-text');
+    const nativeSelect = document.getElementById('examSelect');
+
+    // Toggle dropdown
+    selected.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selected.classList.toggle('active');
+        optionsContainer.classList.toggle('show');
+    });
+
+    // Handle option selection
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const value = option.dataset.value;
+            const text = option.textContent;
+
+            // Update display text
+            dropdownText.textContent = text;
+
+            // Update native select for form compatibility
+            nativeSelect.value = value;
+
+            // Update selected state
+            options.forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+
+            // Close dropdown
+            selected.classList.remove('active');
+            optionsContainer.classList.remove('show');
+
+            // Trigger change event on native select
+            nativeSelect.dispatchEvent(new Event('change'));
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+            selected.classList.remove('active');
+            optionsContainer.classList.remove('show');
+        }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            selected.classList.remove('active');
+            optionsContainer.classList.remove('show');
+        }
+    });
+}
+
+// ============================================
 // INITIALIZE ALL EFFECTS
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Delay initialization for smoother page load
+    // Initialize custom dropdown immediately
+    initCustomDropdown();
+
+    // Delay other initializations for smoother page load
     setTimeout(() => {
         initScrollReveal();
         init3DTilt();

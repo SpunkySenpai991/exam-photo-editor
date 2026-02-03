@@ -73,7 +73,8 @@
                         <span class="label-icon">🎓</span>
                         Choose Exam:
                     </label>
-                    <select id="examSelect" class="input-field">
+                    <!-- Hidden native select for form data -->
+                    <select id="examSelect" class="input-field" style="display: none;">
                         <option value="">-- Select an Exam --</option>
                         <optgroup label="🔬 Engineering & Science">
                             <option value="jee">JEE Main</option>
@@ -113,6 +114,49 @@
                             <option value="afcat">AFCAT</option>
                         </optgroup>
                     </select>
+                    <!-- Custom Dropdown -->
+                    <div class="custom-dropdown" id="customDropdown">
+                        <div class="dropdown-selected">
+                            <span class="dropdown-text">-- Select an Exam --</span>
+                            <svg class="dropdown-arrow" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="dropdown-options">
+                            <div class="dropdown-option" data-value="">-- Select an Exam --</div>
+                            <div class="dropdown-group-label">🔬 Engineering & Science</div>
+                            <div class="dropdown-option" data-value="jee">JEE Main</div>
+                            <div class="dropdown-option" data-value="jee_advanced">JEE Advanced</div>
+                            <div class="dropdown-option" data-value="gate">GATE</div>
+                            <div class="dropdown-option" data-value="neet">NEET UG</div>
+                            <div class="dropdown-group-label">📚 University & Higher Education</div>
+                            <div class="dropdown-option" data-value="cuet">CUET (UG)</div>
+                            <div class="dropdown-option" data-value="ugc_net">UGC NET</div>
+                            <div class="dropdown-option" data-value="cat">CAT</div>
+                            <div class="dropdown-option" data-value="clat">CLAT</div>
+                            <div class="dropdown-option" data-value="ctet">CTET</div>
+                            <div class="dropdown-group-label">🏛️ Government & Civil Services</div>
+                            <div class="dropdown-option" data-value="upsc">UPSC Civil Services</div>
+                            <div class="dropdown-option" data-value="uppsc">UPPSC</div>
+                            <div class="dropdown-option" data-value="bpsc">BPSC</div>
+                            <div class="dropdown-option" data-value="mppsc">MPPSC</div>
+                            <div class="dropdown-option" data-value="rpsc">RPSC</div>
+                            <div class="dropdown-group-label">🏦 Banking & Insurance</div>
+                            <div class="dropdown-option" data-value="ibps">IBPS PO/Clerk</div>
+                            <div class="dropdown-option" data-value="sbi">SBI PO/Clerk</div>
+                            <div class="dropdown-option" data-value="rbi">RBI Grade B</div>
+                            <div class="dropdown-option" data-value="lic">LIC AAO</div>
+                            <div class="dropdown-group-label">📝 SSC & Railway</div>
+                            <div class="dropdown-option" data-value="ssc">SSC CGL/CHSL</div>
+                            <div class="dropdown-option" data-value="rrb_ntpc">RRB NTPC</div>
+                            <div class="dropdown-option" data-value="rrb_je">RRB JE</div>
+                            <div class="dropdown-option" data-value="rrb_group_d">RRB Group D</div>
+                            <div class="dropdown-group-label">🎖️ Defence</div>
+                            <div class="dropdown-option" data-value="nda">NDA & NA</div>
+                            <div class="dropdown-option" data-value="cds">CDS</div>
+                            <div class="dropdown-option" data-value="afcat">AFCAT</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="examInfo" class="exam-info" style="display: none;">
