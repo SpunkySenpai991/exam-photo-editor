@@ -763,13 +763,23 @@ select.input-field {
 /* Light theme custom dropdown */
 [data-theme="light"] .dropdown-selected,
 [data-theme="light"] .dropdown-options {
-    background: var(--bg-glass);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .dropdown-option {
+    color: #0f172a;
 }
 
 [data-theme="light"] .dropdown-option:hover,
 [data-theme="light"] .dropdown-option.selected {
-    background: rgba(0, 245, 212, 0.15);
-    color: var(--secondary);
+    background: rgba(0, 245, 212, 0.2);
+    color: #7b2cbf;
+}
+
+[data-theme="light"] .dropdown-group-label {
+    color: #7b2cbf;
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ============================================
