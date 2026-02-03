@@ -642,39 +642,33 @@ select.input-field {
 /* Dropdown Options Styling */
 select.input-field option,
 select.input-field optgroup {
-    background: #0a0a0f;
-    color: #ffffff;
-    padding: 14px 16px;
-    border-bottom: 1px solid rgba(0, 245, 212, 0.2);
-    border-left: 3px solid transparent;
-    transition: all 0.2s ease;
+    background: rgba(20, 20, 35, 0.95);
+    color: rgba(255, 255, 255, 0.85);
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    margin: 2px 4px;
 }
 
 select.input-field option:hover,
 select.input-field option:focus {
-    background: linear-gradient(90deg, rgba(0, 245, 212, 0.15), transparent);
-    border-left: 3px solid #00f5d4;
+    background: rgba(0, 245, 212, 0.15);
     color: #00f5d4;
 }
 
 select.input-field option:checked {
-    background: linear-gradient(90deg, rgba(0, 245, 212, 0.25), rgba(123, 44, 191, 0.15));
-    border-left: 3px solid #00f5d4;
+    background: rgba(0, 245, 212, 0.2);
     color: #00f5d4;
-    font-weight: 600;
 }
 
 select.input-field optgroup {
     color: #00f5d4;
-    font-weight: 700;
+    font-weight: 600;
     font-style: normal;
-    padding: 12px 16px;
-    background: linear-gradient(90deg, #14141f, #1a1a2e);
-    border-bottom: 2px solid rgba(0, 245, 212, 0.4);
-    border-top: 1px solid rgba(123, 44, 191, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.85rem;
+    padding: 10px 12px;
+    background: rgba(20, 20, 35, 0.98);
+    border: none;
+    font-size: 0.9rem;
 }
 
 /* Light theme dropdown */
@@ -684,17 +678,19 @@ select.input-field optgroup {
 
 [data-theme="light"] select.input-field option,
 [data-theme="light"] select.input-field optgroup {
-    background: #f8fafc;
+    background: rgba(248, 250, 252, 0.95);
     color: #0f172a;
 }
 
+[data-theme="light"] select.input-field option:hover,
+[data-theme="light"] select.input-field option:focus,
 [data-theme="light"] select.input-field option:checked {
-    background: linear-gradient(135deg, #00f5d4, #7b2cbf);
-    color: #0a0a0f;
+    background: rgba(0, 245, 212, 0.2);
+    color: #7b2cbf;
 }
 
 [data-theme="light"] select.input-field optgroup {
-    background: #e2e8f0;
+    background: rgba(226, 232, 240, 0.95);
     color: #7b2cbf;
 }
 
