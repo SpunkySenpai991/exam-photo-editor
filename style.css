@@ -1490,6 +1490,40 @@ label {
    SOCIAL LINKS
    ============================================ */
 
+/* Contact Email */
+.contact-email {
+    margin: 12px 0;
+}
+
+.contact-email a {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.4s var(--ease-out-expo);
+}
+
+.contact-email a:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--bg-glass-hover);
+    transform: translateX(5px);
+    box-shadow: var(--shadow-glow);
+}
+
+.contact-email svg {
+    transition: transform 0.3s ease;
+}
+
+.contact-email a:hover svg {
+    transform: scale(1.1);
+}
+
 .social-links {
     display: flex;
     gap: 16px;
