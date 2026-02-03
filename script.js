@@ -742,10 +742,11 @@ function init3DTilt() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
+            // Reduced rotation intensity (divided by 50 instead of 20)
+            const rotateX = (y - centerY) / 50;
+            const rotateY = (centerX - x) / 50;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
         });
 
         card.addEventListener('mouseleave', () => {

@@ -644,23 +644,37 @@ select.input-field option,
 select.input-field optgroup {
     background: #0a0a0f;
     color: #ffffff;
-    padding: 12px 16px;
-    border: none;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0, 245, 212, 0.2);
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
 }
 
 select.input-field option:hover,
-select.input-field option:focus,
+select.input-field option:focus {
+    background: linear-gradient(90deg, rgba(0, 245, 212, 0.15), transparent);
+    border-left: 3px solid #00f5d4;
+    color: #00f5d4;
+}
+
 select.input-field option:checked {
-    background: linear-gradient(135deg, #00f5d4, #7b2cbf);
-    color: #0a0a0f;
+    background: linear-gradient(90deg, rgba(0, 245, 212, 0.25), rgba(123, 44, 191, 0.15));
+    border-left: 3px solid #00f5d4;
+    color: #00f5d4;
+    font-weight: 600;
 }
 
 select.input-field optgroup {
     color: #00f5d4;
     font-weight: 700;
     font-style: normal;
-    padding: 8px 12px;
-    background: #14141f;
+    padding: 12px 16px;
+    background: linear-gradient(90deg, #14141f, #1a1a2e);
+    border-bottom: 2px solid rgba(0, 245, 212, 0.4);
+    border-top: 1px solid rgba(123, 44, 191, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
 }
 
 /* Light theme dropdown */
